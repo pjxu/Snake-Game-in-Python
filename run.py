@@ -18,7 +18,7 @@
 from graphics import *
 from time import *
 from random import *
-from audioplayer import *
+#from audioplayer import *
 from button import *
 from gamemenu_resize import *
 from boundary import *
@@ -35,10 +35,10 @@ class SnakeGame:
         self.hardmode = hard
         
         #play the bgm
-        if self.hardmode == False:
-            startSound("bgm.wav", async=True, loop=True)
-        else:
-            startSound("bgm2.wav", async=True, loop=True)
+        #if self.hardmode == False:
+        #    startSound("bgm.wav", async=True, loop=True)
+        #else:
+        #    startSound("bgm2.wav", async=True, loop=True)
         
         #self.win = GraphWin('SnakeGame', 600, 600)
 
@@ -229,7 +229,7 @@ class SnakeGame:
         print ("esc key pressed")
         self.running = False
         
-        stopSound()
+        #stopSound()
         self.win.close()
         self.win.master.quit()
 
@@ -269,7 +269,7 @@ class SnakeGame:
                         break
 
             except (GraphicsError):
-                stopSound()
+                #stopSound()
                 return
 
     #the following method is not fully used, reserved for fun
@@ -435,7 +435,7 @@ class SnakeGame:
 
     #the best score display and redraw the menu
     def menu(self):
-        stopSound()
+        #stopSound()
 
         self.boundaryL.remove()
         self.boundaryU.remove()
@@ -471,120 +471,119 @@ class SnakeGame:
     def pausemenu(self, losemsg):
         ''' show a menu to let player choose to keep playing the samel level
         or go back to main menu'''
-        try:
-            #startSound("busted.wav", async=True, loop=False)
-            self.allowmove = False
-            #stop the snake
-            if self.keypressed == True:
-                self.dx = self.dy = 0
-            self.allowdraw = False
-            self.isStill = True
-            self.allowkey = False
+        #startSound("busted.wav", async=True, loop=False)
+        self.allowmove = False
+        #stop the snake
+        if self.keypressed == True:
+            self.dx = self.dy = 0
+        self.allowdraw = False
+        self.isStill = True
+        self.allowkey = False
 
-            #remove the fruit
-            self.circle.undraw()
-            self.losemsg = losemsg
-            self.end = Text(Point(50,50), self.losemsg)
-            self.end.setSize(20)
-            self.end.draw(self.win)
+        #remove the fruit
+        self.circle.undraw()
+        self.losemsg = losemsg
+        self.end = Text(Point(50,50), self.losemsg)
+        self.end.setSize(20)
+        self.end.draw(self.win)
 
-            #display the last score the player just hit
-            self.lastscore()
+        #display the last score the player just hit
+        self.lastscore()
 
-            #the try-again button
-            self.againButton = Button(self.win, Point(50,30), 15, 8, 'Try Again')
-            self.againButton.display()
+        #the try-again button
+        self.againButton = Button(self.win, Point(50,30), 15, 8, 'Try Again')
+        self.againButton.display()
 
-            #the menu button
-            self.tomenuButton = Button(self.win, Point(50,20), 15, 8, 'Game Menu')
-            self.tomenuButton.display()
+        #the menu button
+        self.tomenuButton = Button(self.win, Point(50,20), 15, 8, 'Game Menu')
+        self.tomenuButton.display()
 
-            #accumulator for the best score
-            if self.score > self.bestscore:
-                self.bestscore = self.score
+        #accumulator for the best score
+        if self.score > self.bestscore:
+            self.bestscore = self.score
 
-            while True:
-                self.clickpt = self.win.getMouse()
-                if self.againButton.clicked(self.clickpt):
-                    #now allow input
-                    self.allowkey = True
-                    #allow to move
-                    self.allowmove = True
-                    #set the direction to 0
-                    self.direction = 0
-                    self.tomenuButton.remove()
-                    self.againButton.remove()
-                    #update the score
+        while True:
+            self.clickpt = self.win.getMouse()
+            if self.againButton.clicked(self.clickpt):
+                #now allow input
+                self.allowkey = True
+                #allow to move
+                self.allowmove = True
+                #set the direction to 0
+                self.direction = 0
+                self.tomenuButton.remove()
+                self.againButton.remove()
+                #update the score
 
-                    if self.score > self.bestscore:
-                        self.bestscore = self.score
-                    self.fruit()
-                    self.end.undraw()
-                    self.scoreboard.undraw()
-                    self.score = 0
-                    self.rect.undraw()
+                if self.score > self.bestscore:
+                    self.bestscore = self.score
+                self.fruit()
+                self.end.undraw()
+                self.scoreboard.undraw()
+                self.score = 0
+                self.rect.undraw()
 
-                    #undraw every cube in the list
-                    for cube in self.cubelist:
-                        cube.undraw()
+                #undraw every cube in the list
+                for cube in self.cubelist:
+                    cube.undraw()
 
-                    self.ehead.undraw()
+                self.ehead.undraw()
 
-                    #undraw every cube in the enemy tail
-                    for cube in self.ecubelist:
-                        cube.undraw()
+                #undraw every cube in the enemy tail
+                for cube in self.ecubelist:
+                    cube.undraw()
 
-                    #and then empty the lists
-                    self.cubelist = []
-                    self.ecubelist = []
+                #and then empty the lists
+                self.cubelist = []
+                self.ecubelist = []
 
-                    #re-initialize the snake head
-                    self.rect = Rectangle(Point(90, 10), Point(92,12))
-                    self.rect.draw(self.win)
-                    self.rect.setFill("black")
+                #re-initialize the snake head
+                self.rect = Rectangle(Point(90, 10), Point(92,12))
+                self.rect.draw(self.win)
+                self.rect.setFill("black")
 
-                    #now draw the enemy snake
-                    self.ehead = Rectangle(Point(10, 80), Point(12, 82))
-                    self.ehead.setWidth(0)
-                    self.ehead.draw(self.win)
-                    self.ehead.setFill("white")
-                    break
+                #now draw the enemy snake
+                self.ehead = Rectangle(Point(10, 80), Point(12, 82))
+                self.ehead.setWidth(0)
+                self.ehead.draw(self.win)
+                self.ehead.setFill("white")
+                break
 
-                #this is the go-to-menu button, largely similar to the again button
-                elif self.tomenuButton.clicked(self.clickpt):
-                    self.direction = 0
-                    self.allowkey = True
-                    self.rect.undraw()
-                    self.ehead.undraw()
+            #this is the go-to-menu button, largely similar to the again button
+            elif self.tomenuButton.clicked(self.clickpt):
+                self.direction = 0
+                self.allowkey = True
+                self.rect.undraw()
+                self.ehead.undraw()
 
-                    #undraw every cube in the enemy tail
-                    for cube in self.cubelist:
-                        cube.undraw()
+                #undraw every cube in the enemy tail
+                for cube in self.cubelist:
+                    cube.undraw()
 
-                    #undraw every cube in the enemy tail
-                    for cube in self.ecubelist:
-                        cube.undraw()
+                #undraw every cube in the enemy tail
+                for cube in self.ecubelist:
+                    cube.undraw()
 
-                    #empty the lists
-                    self.cubelist = []
-                    self.ecubelist = []
+                #empty the lists
+                self.cubelist = []
+                self.ecubelist = []
 
-                    self.how1.setFill('green4')
-                    self.how2.setFill('green4')
-                    self.how3.setFill('green4')
-                    self.circle.undraw()
-                    self.end.undraw()
-                    self.scoreboard.undraw()
-                    self.score = 0
-                    self.againButton.remove()
-                    self.tomenuButton.remove()
-                    self.topscoredisplay()
-                    self.menu()
-                    break
+                self.how1.setFill('green4')
+                self.how2.setFill('green4')
+                self.how3.setFill('green4')
+                self.circle.undraw()
+                self.end.undraw()
+                self.scoreboard.undraw()
+                self.score = 0
+                self.againButton.remove()
+                self.tomenuButton.remove()
+                self.topscoredisplay()
+                self.menu()
+                break
 
-        except (GraphicsError):
-            print("ge")
-            return
+        #except (GraphicsError):
+        #    print("ge")
+        #    return
 
     #the status bar on top of the screen
     def statusbar(self):
@@ -686,7 +685,7 @@ class SnakeGame:
                 if self.currPosX - 1 < self.fruitposXright:
                     if self.fruitposYdown < self.currPosY + 1:
                         if self.currPosY - 1 < self.fruitposYup:
-                            startSound("eatfruit.wav", async=True, loop=False)
+                            #startSound("eatfruit.wav", async=True, loop=False)
                             #increase the score by 1
                             self.score += 1
                             #undraw the previous fruit
@@ -739,7 +738,7 @@ class SnakeGame:
                 if self.currPosXe - 1 < self.fruitposXright:
                     if self.fruitposYdown < self.currPosYe + 1:
                         if self.currPosYe - 1 < self.fruitposYup:
-                            startSound("eatfruit.wav", async=True, loop=False)
+                            #startSound("eatfruit.wav", async=True, loop=False)
                             #increase the score by 1
                             #self.score += 1
                             #undraw the previous fruit
