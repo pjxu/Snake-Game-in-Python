@@ -58,7 +58,7 @@ class SnakeGame:
         self.boundaryR.display()
         self.boundaryD.display()
 
-        #james
+        
         self.running = True
 
         #set a variable to see if the key is pressed
@@ -227,7 +227,6 @@ class SnakeGame:
     #key binding
     def escKey(self, event):
         print ("esc key pressed")
-        #james
         self.running = False
         
         stopSound()
