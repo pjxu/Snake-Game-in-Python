@@ -1,5 +1,6 @@
 #Jason Xu CONNCOLL 2017
 #Last modified on June 12th, 2016
+#8-20-2019 Debug: delete bugging audio aux
 #this version has been modified after the final ended
 #Intended to add an enemy snake to it
 
