@@ -1,7 +1,5 @@
-Jason Xu class of 2017 of Conncoll\
-*CS 110 Final Project\
-*tested on mac, may have unexpected occurrence on windows\
-\
+Download run.zip, unzip, and then select the run.exe to play the game.
+
 *music credits not owned by me\
 \
 *enter run.py to play\
