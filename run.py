@@ -1,4 +1,3 @@
-#Jason Xu CONNCOLL 2017
 #June 12th, 2016 Debug: Upload
 #8-20-2019 Debug: delete bugging audio aux
 #this version has been modified after the final ended
